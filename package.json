@@ -9,6 +9,7 @@
   "author": "Kingili",
   "license": "MIT",
   "dependencies": {
+    "commands": "0.0.7",
     "discord.js": "^12.5.3"
   }
 }
