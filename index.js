@@ -6,12 +6,14 @@ const fs = require("fs");
 const client = new Discord.Client();
 
 client.commands = new Discord.Collection();
-
-const commandfiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
-
 //presence and ready message and some constants
 const prefix = "k!"
 const trim = (str, max) => (str.length > max ? `${str.slice(0, max - 3)}...` : str);
+const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
+for (const file of commandFiles) {
+	const command = require(`./commands/${file}`);
+	client.commands.set(command.name, command);
+};
 client.once('ready', () => {
     console.log(`Ready! Logged in as ${client.user.tag}!`);
     client.user.setPresence({
@@ -21,12 +23,7 @@ client.once('ready', () => {
             name: 'Ruling my Kingdom',
         }
     });
-const commandFiles = fs.readdirSync('./commands/').filter(file => file.endsWith('.js'));
-for(const file of commandFiles){
-    const command = require(`./commands/${file}`);
- 
-    client.commands.set(command.name, command);
-}
+});
     //error logging
     client.on('shardError', error => {
         console.error('A websocket connection encountered an error:', error);
@@ -35,25 +32,21 @@ for(const file of commandFiles){
     process.on('unhandledRejection', error => {
         console.error('Unhandled promise rejection:', error);
     });
-    //start of actual code
-    client.on('message', async message => {
-        if (message.content.startsWith(`${prefix}eval`)) {
-            try {
-                const evalembed = new Discord.MessageEmbed()
-                    .setTitle("Eval")
-                    .addField("Input", result)
-                    .setFooter("King Bot")
-                    .setColor("#d9d332")
-                    .setTimestamp()
-                message.channel.send(evalembed)
-                const result = message.content.split(" ").slice(1).join(" ")
-                const output = await eval(result)
-                message.reply(evalembed().addField("Output", output))
-            } catch (err) {
-                message.channel.send(new Discord.MessageEmbed().setColor("#d9d332").addField("Error", console.error));
-            };
-        };
-    });
+client.on('message', message => {
+	if (!message.content.startsWith(prefix) || message.author.bot) return;
+
+	const args = message.content.slice(prefix.length).trim().split(/ +/);
+	const command = args.shift().toLowerCase();
+
+	if (!client.commands.has(command)) return;
+
+	try {
+		client.commands.get(command).execute(message, args);
+	} catch (error) {
+		console.error(error);
+		message.reply('there was an error trying to execute that command!');
+	}
 });
+
 //login
 client.login(process.env.token)

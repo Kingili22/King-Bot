@@ -1,4 +1,4 @@
-module.exports.run = (bot, message, args) => {
+module.exports = (bot, message, args) => {
 if (message.content === `k!help`) {
   message.channel.send(`404 HELP NOT FOUND`)
 }
