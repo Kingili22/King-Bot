@@ -1,1 +1,18 @@
+{
+  "name": "king-bot",
+  "version": "1.0.0",
+  "description": "King Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kingili",
+  "license": "MIT",
+  "dependencies": {
+    "commands": "0.0.7",
+    "discord.js": "^12.5.3",
+    "fetch": "^1.1.0",
+    "node-fetch": "^2.6.1"
+  }
+}
 
