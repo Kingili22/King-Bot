@@ -3,6 +3,8 @@ const Discord = require('discord.js');
 
 const fs = require("fs");
 
+const fetch = require('node-fetch');
+
 const client = new Discord.Client();
 
 client.commands = new Discord.Collection();

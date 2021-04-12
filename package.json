@@ -10,6 +10,8 @@
   "license": "MIT",
   "dependencies": {
     "commands": "0.0.7",
-    "discord.js": "^12.5.3"
+    "discord.js": "^12.5.3",
+    "fetch": "^1.1.0",
+    "node-fetch": "^2.6.1"
   }
 }
