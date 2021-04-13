@@ -4,8 +4,8 @@ module.exports = {
 	name: "eval",
 	aliases: [],
 	description: "Evaluates a command inside of Discord",
-	usage: "k!eval",
-	category: "Misc",
+	usage: "--eval",
+	category: "OwnerOnly",
   userID: "535235896530960395",
   async execute (message, args) {
     try {

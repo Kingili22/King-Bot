@@ -5,8 +5,8 @@ module.exports = {
 	name: "dog",
 	aliases: ["dog"],
 	description: "A wild doge",
-	usage: "k!dog",
-	category: "Misc",
+	usage: "--dog",
+	category: "Image",
   userPermissions: ['SEND_MESSAGES'],
   async execute(msg, args) {       
       try {

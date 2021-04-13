@@ -5,11 +5,13 @@ const fs = require("fs");
 
 const fetch = require('node-fetch');
 
+const { execSync } = require('child_process')
+
 const client = new Discord.Client();
 
 client.commands = new Discord.Collection();
 //presence and ready message and some constants
-const prefix = "k!"
+const prefix = "--"
 const trim = (str, max) => (str.length > max ? `${str.slice(0, max - 3)}...` : str);
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {
